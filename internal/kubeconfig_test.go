@@ -6,8 +6,6 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/davecgh/go-spew/spew"
-
 	"github.com/mitchellh/go-homedir"
 	"github.com/stretchr/testify/assert"
 )
@@ -100,6 +98,43 @@ func TestKubeConfig_SetCurrentContext(t *testing.T) {
 	}
 }
 
+func TestKubeConfig_SetNamespace(t *testing.T) {
+	assert := assert.New(t)
+
+	cfgPath, err := KubeConfigPath()
+	if err != nil {
+		return
+	}
+
+	kubeConfig, err := NewKubeConfig(cfgPath)
+	assert.NoError(err)
+
+	tests := map[string]struct {
+		contextName string
+		namespace   string
+		isErr       bool
+	}{
+		"success-1": {
+			contextName: "minikube",
+			namespace:   "test",
+		},
+	}
+
+	for _, t := range tests {
+		err := kubeConfig.SetNamespace(t.contextName, t.namespace)
+		assert.Equal(t.isErr, err != nil)
+		if err == nil {
+			contexts, err := kubeConfig.GetContexts()
+			assert.NoError(err)
+			for _, ctx := range contexts {
+				if ctx.Name == t.contextName {
+					assert.Equal(t.namespace, ctx.Namespace)
+				}
+			}
+		}
+	}
+}
+
 func TestKubeConfig_GetContexts(t *testing.T) {
 	assert := assert.New(t)
 
@@ -127,7 +162,6 @@ func TestKubeConfig_GetContexts(t *testing.T) {
 				assert.NotEmpty(ctx.Cluster)
 				assert.NotEmpty(ctx.User)
 				assert.NotEmpty(ctx.Server)
-				spew.Dump(ctx)
 			}
 		}
 
