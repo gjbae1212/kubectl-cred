@@ -85,6 +85,18 @@ func (k *KubeConfig) SetNamespace(ctxName, namespace string) error {
 	return nil
 }
 
+// ChangeContextName changes context name in context section.
+func (k *KubeConfig) ChangeContextName(ctxName, changedCtxName string) error {
+	node, err := k.rootNode.Query(fmt.Sprintf(".contexts.(.name=%s)", ctxName))
+	if err != nil {
+		return err
+	}
+	if err := node.Put(".name", changedCtxName); err != nil {
+		return err
+	}
+	return nil
+}
+
 // GetContexts returns kubernetes context list.
 func (k *KubeConfig) GetContexts() ([]*KubeContext, error) {
 	// get cluster nodes.

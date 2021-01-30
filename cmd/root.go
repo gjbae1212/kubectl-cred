@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"sort"
+	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/fatih/color"
@@ -18,12 +19,18 @@ var (
 		Example: `
 # Switch context using an interactive CLI.
 kubectl cred ctx
+
 # Switch namespace using an interactive CLI.
 kubectl cred ns
+
 # Show your all of contexts information formatted tree.
 kubectl cred ls
-# Show your current context information
+
+# Show your current context information.
 kubectl cred current
+
+# Rename context name in k8s config, using an interactive CLI.
+kubectl cred rename
 `,
 	}
 )
@@ -104,4 +111,23 @@ func askNamespace(contextName string, namespaces []string) (string, error) {
 	}
 
 	return selectKey, nil
+}
+
+func askWantedContextName() string {
+	prompt := &survey.Input{
+		Message: "Type to your wanted to change context name:",
+	}
+	var contextName string
+	survey.AskOne(prompt, &contextName)
+	contextName = strings.TrimSpace(contextName)
+	return contextName
+}
+
+func askConfirmChangingContextName(currentContextName, changeContextName string) bool {
+	ok := false
+	prompt := &survey.Confirm{
+		Message: fmt.Sprintf("Do you really want to change %s to %s", currentContextName, changeContextName),
+	}
+	survey.AskOne(prompt, &ok)
+	return ok
 }

@@ -135,6 +135,34 @@ func TestKubeConfig_SetNamespace(t *testing.T) {
 	}
 }
 
+func TestKubeConfig_ChangeContextName(t *testing.T) {
+	assert := assert.New(t)
+
+	cfgPath, err := KubeConfigPath()
+	if err != nil {
+		return
+	}
+
+	kubeConfig, err := NewKubeConfig(cfgPath)
+	assert.NoError(err)
+
+	tests := map[string]struct {
+		contextName        string
+		changedContextName string
+		isErr              bool
+	}{
+		"success-1": {
+			contextName:        "minikube",
+			changedContextName: "minikube-test",
+		},
+	}
+
+	for _, t := range tests {
+		err := kubeConfig.ChangeContextName(t.contextName, t.changedContextName)
+		assert.Equal(t.isErr, err != nil)
+	}
+}
+
 func TestKubeConfig_GetContexts(t *testing.T) {
 	assert := assert.New(t)
 
