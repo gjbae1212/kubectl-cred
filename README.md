@@ -1,9 +1,9 @@
 # kubectl-cred
 
 ``` kubectl-cred``` is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.  
-  
-![cred](./kubectl-cred.gif)  
-  
+<p align="center">
+<img src="https://storage.googleapis.com/gjbae1212-asset/kubectl-cred/kubectl-cred.gif"/>
+</p>  
   
 <p align="center">
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjbae1212%2Fkubectl-cred&count_bg=%2379C83D&title_bg=%237F7F7F&icon=kubernetes.svg&icon_color=%23015894&title=k8s-plugin&edge_flat=false"/></a>
