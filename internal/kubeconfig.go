@@ -62,7 +62,7 @@ func (k *KubeConfig) GetCurrentContext() (*KubeContext, error) {
 			return ctx, nil
 		}
 	}
-	return nil, nil
+	return &KubeContext{}, nil
 }
 
 // SetCurrentContext sets current context by passing param.
