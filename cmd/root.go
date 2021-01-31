@@ -14,8 +14,8 @@ import (
 var (
 	rootCmd = &cobra.Command{
 		Use:   "kubectl-cred",
-		Short: color.CyanString(`kubectl-cred is an interactive CLI to be able to switch kubernetes context.`),
-		Long:  color.CyanString(`kubectl-cred is an interactive CLI to be able to switch kubernetes context.`),
+		Short: color.CyanString(`kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.`),
+		Long:  color.CyanString(`kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.`),
 		Example: `
 # Switch context using an interactive CLI.
 kubectl cred ctx
