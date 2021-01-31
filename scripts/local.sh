@@ -10,8 +10,9 @@ CURRENT=`pwd`
 function make_krew
 {
   # write result to plugins/cred.yaml.
+  local tag=$1
   docker run -v $CURRENT/.krew.yaml:/tmp/template-file.yaml rajatjindal/krew-release-bot:v0.0.38 \
-  krew-release-bot template --tag v0.1.4 --template-file /tmp/template-file.yaml
+  krew-release-bot template --tag $tag --template-file /tmp/template-file.yaml
 }
 
 function test
