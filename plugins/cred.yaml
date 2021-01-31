@@ -1,0 +1,47 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: cred
+spec:
+  version: v0.1.4
+  homepage: https://github.com/gjbae1212/kubectl-cred
+  shortDescription: kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
+  description: |
+    kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
+
+    # Switch context using an interactive CLI.
+    kubectl cred ctx
+
+    # Switch namespace using an interactive CLI.
+    kubectl cred ns
+
+    # Show your all of contexts information formatted tree.
+    kubectl cred ls
+
+    # Show your current context information.
+    kubectl cred current
+
+    # Rename context name in k8s config, using an interactive CLI.
+    kubectl cred rename
+  platforms:
+    - selector:
+        matchLabels:
+          os: darwin
+          arch: amd64
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.4/kubectl-cred_v0.1.4_Darwin_x86_64.tar.gz
+      sha256: dc9eb1812f892d06db2f3c6c46874815d2de6add38f96b9e637596d4d27d7cb6
+      bin: kubectl-cred
+    - selector:
+        matchLabels:
+          os: linux
+          arch: amd64
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.4/kubectl-cred_v0.1.4_Linux_x86_64.tar.gz
+      sha256: 87c5003b986a48ead218d431107a2cf27314212134b4a505f2ed3ac7a620850d
+      bin: kubectl-cred
+    - selector:
+        matchLabels:
+          os: windows
+          arch: amd64
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.4/kubectl-cred_v0.1.4_Windows_x86_64.tar.gz
+      sha256: a5d1ba293ddc302707fa0e936fc1a266962060415c2f793b6937268a781dc008
+      bin: kubectl-cred.exe
