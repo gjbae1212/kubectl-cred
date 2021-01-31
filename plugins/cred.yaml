@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: cred
 spec:
-  version: v0.1.5
+  version: v0.1.6
   homepage: https://github.com/gjbae1212/kubectl-cred
   shortDescription: kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
   description: |
@@ -28,20 +28,20 @@ spec:
         matchLabels:
           os: darwin
           arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.5/kubectl-cred_v0.1.5_Darwin_x86_64.tar.gz
-      sha256: a5ab93a1de6a1d6a06fd6f001e077e28ed68ccb024dfd2de90c89b7878500770
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.6/kubectl-cred_v0.1.6_Darwin_x86_64.tar.gz
+      sha256: 2b7a2c269f2be882d31929d9717a802824a15fe26983df37a3c043ce88d8c36e
       bin: kubectl-cred
     - selector:
         matchLabels:
           os: linux
           arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.5/kubectl-cred_v0.1.5_Linux_x86_64.tar.gz
-      sha256: 802e809a3319edcbdee2bc69e9c9b2ae19f790ee5b0739bd0b22b2bacc967bf4
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.6/kubectl-cred_v0.1.6_Linux_x86_64.tar.gz
+      sha256: d28b7ab6b333eb93b7e51ffdf5ec85eec26da7b5b6c0b2f1a32330a2b90a8ad3
       bin: kubectl-cred
     - selector:
         matchLabels:
           os: windows
           arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.5/kubectl-cred_v0.1.5_Windows_x86_64.tar.gz
-      sha256: b474e9a3c26a4332892d4e1d768e1199a1b110c7589bd54ba28a15e40e7b422b
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.6/kubectl-cred_v0.1.6_Windows_x86_64.tar.gz
+      sha256: e63d2f0e14ae34286baec83bb4309e75081e3a13ea877e8468844e251c27e6c4
       bin: kubectl-cred.exe
