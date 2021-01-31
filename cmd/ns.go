@@ -69,9 +69,9 @@ func nsRun() commandRun {
 		}
 		fmt.Printf("%s %s %s, %s %s\n",
 			color.GreenString("[success]"),
-			color.YellowString("set context:"),
+			color.YellowString("switched to context:"),
 			color.CyanString(currentContext.Name),
-			color.YellowString("set namespace:"),
+			color.YellowString("switched to namespace:"),
 			color.MagentaString(namespace),
 		)
 	}
