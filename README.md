@@ -49,13 +49,13 @@ $ brew tap gjbae1212/kubectl-cred
 $ brew install kubectl-cred
 
 # mac 
-wget https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.5/kubectl-cred_v0.1.5_Darwin_x86_64.tar.gz
+wget https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.7/kubectl-cred_v0.1.7_Darwin_x86_64.tar.gz
 
 # linux
-wget https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.5/kubectl-cred_v0.1.5_Linux_x86_64.tar.gz
+wget https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.7/kubectl-cred_v0.1.7_Linux_x86_64.tar.gz
 
 # windows
-wget https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.5/kubectl-cred_v0.1.5_Windows_x86_64.tar.gz
+wget https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.7/kubectl-cred_v0.1.7_Windows_x86_64.tar.gz
 ```
 
 ## LICENSE
