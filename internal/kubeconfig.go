@@ -110,7 +110,7 @@ func (k *KubeConfig) GetContexts() ([]*KubeContext, error) {
 			for e1, v1 := range ctx.(map[interface{}]interface{}) {
 				k1, err := InterfaceToString(e1)
 				if err != nil {
-					return nil, err
+					continue
 				}
 				switch k1 {
 				case "cluster":
