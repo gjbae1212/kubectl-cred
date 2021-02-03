@@ -31,7 +31,7 @@ func TestInterfaceToString(t *testing.T) {
 	}
 }
 
-func TestInterfaceTotMap(t *testing.T) {
+func TestInterfaceToMap(t *testing.T) {
 	assert := assert.New(t)
 
 	tests := map[string]struct {
@@ -54,15 +54,21 @@ func TestInterfaceTotMap(t *testing.T) {
 			input: map[string]int{"aa": 11, "cc": 22}, output: map[string]string{"aa": "11", "cc": "22"},
 		},
 		"map[int]string": {
-			input: map[int]string{ 11:"aa", 22: "cc"}, output: map[string]string{"11": "aa", "22": "cc"},
+			input: map[int]string{11: "aa", 22: "cc"}, output: map[string]string{"11": "aa", "22": "cc"},
 		},
-		"map[interface]interface": {
+		"map[interface]interface-1": {
 			input: map[interface{}]interface{}{"aa": 11, "cc": 22}, output: map[string]string{"aa": "11", "cc": "22"},
+		},
+		"map[interface]interface-2": {
+			input: map[interface{}]interface{}{"aa": map[string]int{"bb": 11}, "cc": map[interface{}]interface{}{
+				"dd": 22,
+			}},
+			output: map[string]string{"aa.bb": "11", "cc.dd": "22"},
 		},
 	}
 
 	for _, t := range tests {
-		output, err := InterfaceTotMap(t.input)
+		output, err := InterfaceToMap(t.input)
 		assert.Equal(t.isErr, err != nil)
 		if err == nil {
 			for k, v := range output {

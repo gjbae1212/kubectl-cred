@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 )
@@ -32,7 +33,7 @@ func InterfaceToString(i interface{}) (string, error) {
 }
 
 // InterfaceToMap converts interface{} type to map[string]string
-func InterfaceTotMap(m interface{}) (map[string]string, error) {
+func InterfaceToMap(m interface{}) (map[string]string, error) {
 	result := make(map[string]string)
 	if m == nil {
 		return result, nil
@@ -47,13 +48,26 @@ func InterfaceTotMap(m interface{}) (map[string]string, error) {
 			if err != nil {
 				return nil, err
 			}
-			value, err := InterfaceToString(rv.MapIndex(k).Interface())
-			if err != nil {
-				return nil, err
+			vvof := reflect.ValueOf(rv.MapIndex(k).Interface())
+			switch vvof.Type().Kind() {
+			case reflect.Map:
+				innerMap, err := InterfaceToMap(rv.MapIndex(k).Interface())
+				if err != nil {
+					return nil, err
+				}
+				for kk, vv := range innerMap {
+					result[name+"."+kk] = vv
+				}
+			case reflect.Slice:
+				result[name] = fmt.Sprintf("%v", rv.MapIndex(k).Interface())
+			default:
+				vv, err := InterfaceToString(rv.MapIndex(k).Interface())
+				if err != nil {
+					return nil, err
+				}
+				result[name] = vv
 			}
-			result[name] = value
 		}
-
 	default:
 		return nil, ErrInvalidParams
 	}
