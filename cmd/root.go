@@ -31,6 +31,9 @@ kubectl cred current
 
 # Rename context name in k8s config, using an interactive CLI.
 kubectl cred rename
+
+# Delete context in k8s config, using an interactive CLI.
+kubectl cred delete
 `,
 	}
 )
