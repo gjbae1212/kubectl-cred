@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: cred
 spec:
-  version: v0.1.9
+  version: v0.2.0
   homepage: https://github.com/gjbae1212/kubectl-cred
   shortDescription: kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
   description: |
@@ -23,25 +23,28 @@ spec:
 
     # Rename context name in k8s config, using an interactive CLI.
     kubectl cred rename
+
+    # Delete context in k8s config, using an interactive CLI.
+    kubectl cred delete
   platforms:
     - selector:
         matchLabels:
           os: darwin
           arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.9/kubectl-cred_v0.1.9_Darwin_x86_64.tar.gz
-      sha256: c7cd9088dddd7028c91a7a8905f82729c0c7dd33615b885dcd33ca998d6ef19f
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.0/kubectl-cred_v0.2.0_Darwin_x86_64.tar.gz
+      sha256: c9370ef0b73a0ed7ed223ec4dab4a9a8d55fe3573a3b8389c2423494cc285c2e
       bin: kubectl-cred
     - selector:
         matchLabels:
           os: linux
           arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.9/kubectl-cred_v0.1.9_Linux_x86_64.tar.gz
-      sha256: 14a4ed047446a884cae97f3c9a7aa99cd7c890605bdb3c7be369b990f86d6e43
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.0/kubectl-cred_v0.2.0_Linux_x86_64.tar.gz
+      sha256: 704998fc68939a51f46a38fbf71a26b2161aa5c55b30d84915c41d9095c40655
       bin: kubectl-cred
     - selector:
         matchLabels:
           os: windows
           arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.1.9/kubectl-cred_v0.1.9_Windows_x86_64.tar.gz
-      sha256: 12be7e6c30bacb130f000f9786a8d34f845b2cfe8995f312e2722b7fdcb774f1
+      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.0/kubectl-cred_v0.2.0_Windows_x86_64.tar.gz
+      sha256: 120935f8e800110af6ed8f950294b65501083aa4777938d7383bf2026d283429
       bin: kubectl-cred.exe
