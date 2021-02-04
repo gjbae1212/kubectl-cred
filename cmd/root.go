@@ -126,7 +126,16 @@ func askWantedContextName() string {
 func askConfirmChangingContextName(currentContextName, changeContextName string) bool {
 	ok := false
 	prompt := &survey.Confirm{
-		Message: fmt.Sprintf("Do you really want to change %s to %s", currentContextName, changeContextName),
+		Message: fmt.Sprintf("Do you really want to change %s to %s?", currentContextName, changeContextName),
+	}
+	survey.AskOne(prompt, &ok)
+	return ok
+}
+
+func askConfirmDeletingContextName(contextName string) bool {
+	ok := false
+	prompt := &survey.Confirm{
+		Message: fmt.Sprintf("Do you really want to delete %s?", contextName),
 	}
 	survey.AskOne(prompt, &ok)
 	return ok

@@ -192,7 +192,50 @@ func TestKubeConfig_GetContexts(t *testing.T) {
 				assert.NotEmpty(ctx.Server)
 			}
 		}
+	}
+}
 
+func TestKubeConfig_DeleteContext(t *testing.T) {
+	assert := assert.New(t)
+
+	cfgPath, err := KubeConfigPath()
+	if err != nil {
+		return
+	}
+
+	kubeConfig, err := NewKubeConfig(cfgPath)
+	assert.NoError(err)
+
+	tests := map[string]struct {
+		input string
+		isErr bool
+	}{
+		"success": {input: "minikube"},
+	}
+
+	for _, t := range tests {
+		ctxs, err := kubeConfig.GetContexts()
+		assert.NoError(err)
+		var deleteContxt *KubeContext
+		for _, ctx := range ctxs {
+			if ctx.Name == t.input {
+				deleteContxt = ctx
+				break
+			}
+		}
+		if deleteContxt != nil {
+			err := kubeConfig.DeleteContext(t.input)
+			assert.Equal(t.isErr, err != nil)
+			if err == nil {
+				ctxs, err := kubeConfig.GetContexts()
+				assert.NoError(err)
+				for _, ctx := range ctxs {
+					assert.NotEqual(deleteContxt.Name, ctx.Name)
+					assert.NotEmpty(deleteContxt.Cluster, ctx.Cluster)
+					assert.NotEmpty(deleteContxt.User, ctx.User)
+				}
+			}
+		}
 	}
 }
 

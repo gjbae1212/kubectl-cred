@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"reflect"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/tomwright/dasel"
@@ -185,6 +186,62 @@ func (k *KubeConfig) GetContexts() ([]*KubeContext, error) {
 	return kubectxs, nil
 }
 
+// DeleteContext deletes context.
+func (k *KubeConfig) DeleteContext(ctxName string) error {
+	contexts, err := k.GetContexts()
+	if err != nil {
+		return err
+	}
+
+	var deleteContext *KubeContext
+	for _, c := range contexts {
+		if c.Name == ctxName {
+			deleteContext = c
+			break
+		}
+	}
+	if deleteContext == nil {
+		return nil
+	}
+
+	unmarshalYaml := k.rootNode.OriginalValue
+	if yamlMap, ok := unmarshalYaml.(map[interface{}]interface{}); ok {
+		for name, value := range yamlMap {
+			switch name.(string) {
+			case "clusters":
+				changed, err := k.deleteByName(value.([]interface{}), deleteContext.Cluster)
+				if err != nil {
+					return err
+				}
+				yamlMap[name] = changed
+			case "contexts":
+				changed, err := k.deleteByName(value.([]interface{}), deleteContext.Name)
+				if err != nil {
+					return err
+				}
+				yamlMap[name] = changed
+			case "current-context":
+				valueString, err := InterfaceToString(value)
+				if err != nil {
+					return err
+				}
+				if valueString == deleteContext.Name {
+					yamlMap[name] = ""
+				}
+			case "users":
+				changed, err := k.deleteByName(value.([]interface{}), deleteContext.User)
+				if err != nil {
+					return err
+				}
+				yamlMap[name] = changed
+			}
+		}
+		k.rootNode.Value = reflect.ValueOf(yamlMap)
+		k.rootNode.OriginalValue = yamlMap
+	}
+	return nil
+}
+
 // Sync syncs rootNode to file.
 func (k *KubeConfig) Sync() error {
 	// copy origin file to prev file.
@@ -223,6 +280,33 @@ func (k *KubeConfig) RawBytes() ([]byte, error) {
 		return nil, err
 	}
 	return bys, err
+}
+
+func (k *KubeConfig) deleteByName(arr []interface{}, name string) ([]interface{}, error) {
+	deleteIndex := -1
+Loop:
+	for index, data := range arr {
+		if m, ok := data.(map[interface{}]interface{}); ok {
+			for k, v := range m {
+				if k.(string) == "name" {
+					vStr, err := InterfaceToString(v)
+					if err != nil {
+						return nil, err
+					}
+					if vStr == name {
+						deleteIndex = index
+						break Loop
+					}
+				}
+			}
+		}
+	}
+
+	if deleteIndex != -1 {
+		arr = append(arr[:deleteIndex], arr[deleteIndex+1:]...)
+	}
+
+	return arr, nil
 }
 
 // NewKubeConfig returns struct for kubernetes config file.

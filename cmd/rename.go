@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/fatih/color"
-
 	"github.com/gjbae1212/kubectl-cred/internal"
 	"github.com/spf13/cobra"
 )
