@@ -3,7 +3,7 @@ kind: Plugin
 metadata:
   name: cred
 spec:
-  version: v0.2.0
+  version: v0.2.2
   homepage: https://github.com/gjbae1212/kubectl-cred
   shortDescription: kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
   description: |
@@ -27,24 +27,31 @@ spec:
     # Delete context in k8s config, using an interactive CLI.
     kubectl cred delete
   platforms:
-    - selector:
-        matchLabels:
-          os: darwin
-          arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.0/kubectl-cred_v0.2.0_Darwin_x86_64.tar.gz
-      sha256: c9370ef0b73a0ed7ed223ec4dab4a9a8d55fe3573a3b8389c2423494cc285c2e
-      bin: kubectl-cred
-    - selector:
-        matchLabels:
-          os: linux
-          arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.0/kubectl-cred_v0.2.0_Linux_x86_64.tar.gz
-      sha256: 704998fc68939a51f46a38fbf71a26b2161aa5c55b30d84915c41d9095c40655
-      bin: kubectl-cred
-    - selector:
-        matchLabels:
-          os: windows
-          arch: amd64
-      uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.0/kubectl-cred_v0.2.0_Windows_x86_64.tar.gz
-      sha256: 120935f8e800110af6ed8f950294b65501083aa4777938d7383bf2026d283429
-      bin: kubectl-cred.exe
+  - selector:
+      matchLabels:
+        os: darwin
+        arch: amd64
+    uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.2/kubectl-cred_v0.2.2_Darwin_x86_64.tar.gz
+    sha256: 7bb6edc49bfaf62037f77159ebc2d7b1a7e445c90de979828da06bdcdddf520c
+    bin: kubectl-cred
+  - selector:
+      matchLabels:
+        os: darwin
+        arch: arm64
+    uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.2/kubectl-cred_v0.2.2_Darwin_arm64.tar.gz
+    sha256: f80af0a0718a342908b11913123cf1d4ef46a32d726a0b2dd5d1514a80d113f9
+    bin: kubectl-cred
+  - selector:
+      matchLabels:
+        os: linux
+        arch: amd64
+    uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.2/kubectl-cred_v0.2.2_Linux_x86_64.tar.gz
+    sha256: f162d2eb85f8e780b1a44ebea21ef695d32c37ba164a77f78cc23a943fadfc89
+    bin: kubectl-cred
+  - selector:
+      matchLabels:
+        os: windows
+        arch: amd64
+    uri: https://github.com/gjbae1212/kubectl-cred/releases/download/v0.2.2/kubectl-cred_v0.2.2_Windows_x86_64.tar.gz
+    sha256: dadfaaae1bcb10549a05e05d169084b0056910df92c1f27d1922b9b8535a1b58
+    bin: kubectl-cred.exe

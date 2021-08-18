@@ -35,6 +35,12 @@ spec:
     bin: kubectl-cred
   - selector:
       matchLabels:
+        os: darwin
+        arch: arm64
+    {{addURIAndSha "https://github.com/gjbae1212/kubectl-cred/releases/download/{{ .TagName }}/kubectl-cred_{{ .TagName }}_Darwin_arm64.tar.gz" .TagName }}
+    bin: kubectl-cred
+  - selector:
+      matchLabels:
         os: linux
         arch: amd64
     {{addURIAndSha "https://github.com/gjbae1212/kubectl-cred/releases/download/{{ .TagName }}/kubectl-cred_{{ .TagName }}_Linux_x86_64.tar.gz" .TagName }}
