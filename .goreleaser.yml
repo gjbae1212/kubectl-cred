@@ -22,6 +22,9 @@ builds:
       - all=-trimpath={{.Env.GOPATH}}
     ldflags:
       - -s -w
+    ignore:
+      - goos: windows
+        goarch: arm64
 archives:
   - replacements:
       darwin: Darwin
@@ -52,3 +55,100 @@ brews:
       name: gjbae1212
       email: gjbae1212@gmail.com
     description: "kubectl-cred is a kubernetes plugin to which switch to contexts using an interactive CLI."
+    install: |
+      bin.install "kubectl-cred"
+krews:
+  -
+    # Name template of the recipe
+    # Default to project name
+    name: cred
+
+    # IDs of the archives to use.
+    # Defaults to all.
+#   ids:
+
+
+    # GOARM to specify which 32-bit arm version to use if there are multiple versions
+    # from the build section. Krew plugin supports at this moment only one 32-bit version.
+    # Default is 6 for all artifacts or each id if there a multiple versions.
+    goarm: 6
+
+    # NOTE: make sure the url_template, the token and given repo (github or gitlab) owner and name are from the
+    # same kind. We will probably unify this in the next major version like it is done with scoop.
+
+    # GitHub/GitLab repository to push the Krew plugin to
+    # Gitea is not supported yet, but the support coming
+    index:
+      owner: gjbae1212
+      name: cred
+
+      # Optionally a branch can be provided.
+      # Defaults to the default repository branch.
+      branch: main
+
+      # Optionally a token can be provided, if it differs from the token provided to GoReleaser
+      token: "{{ .Env.GITHUB_TOKEN }}"
+
+    # Template for the url which is determined by the given Token (github or gitlab)
+    # Default for github is "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    # Default for gitlab is "https://gitlab.com/<repo_owner>/<repo_name>/-/releases/{{ .Tag }}/downloads/{{ .ArtifactName }}"
+    # Default for gitea is "https://gitea.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    url_template: "https://github.com/gjbae1212/kubectl-cred/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+
+    # Git author used to commit to the repository.
+    # Defaults are shown.
+    commit_author:
+      name: goreleaserbot
+      email: goreleaser@carlosbecker.com
+
+    # The project name and current git tag are used in the format string.
+    commit_msg_template: "Krew plugin update for {{ .ProjectName }} version {{ .Tag }}"
+
+    # Your app's homepage.
+    # Default is empty.
+    homepage: "https://github.com/gjbae1212/kubectl-cred"
+
+    # Template of your app's description.
+    # The usual guideline for this is to wrap the line at 80 chars.
+    #
+    # Default is empty.
+    description: |
+        kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
+
+        # Switch context using an interactive CLI.
+        kubectl cred ctx
+
+        # Switch namespace using an interactive CLI.
+        kubectl cred ns
+
+        # Show your all of contexts information formatted tree.
+        kubectl cred ls
+
+        # Show your current context information.
+        kubectl cred current
+
+        # Rename context name in k8s config, using an interactive CLI.
+        kubectl cred rename
+
+        # Delete context in k8s config, using an interactive CLI.
+        kubectl cred delete
+
+    # Template of your app's short description.
+    # The usual guideline for this is to be at most 50 chars long.
+    #
+    # Default is empty.
+    short_description: kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
+
+    # Caveats for the user of your binary.
+    # The usual guideline for this is to wrap the line at 80 chars.
+    #
+    # Default is empty.
+    caveats:
+
+    # Setting this will prevent goreleaser to actually try to commit the updated
+    # krew plugin - instead, the plugin file will be stored on the dist folder only,
+    # leaving the responsibility of publishing it to the user.
+    # If set to auto, the release will not be uploaded to the Krew plugin
+    # in case there is an indicator for prerelease in the tag e.g. v1.0.0-rc1
+    # Default is false.
+    skip_upload: true
