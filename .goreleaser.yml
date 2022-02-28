@@ -137,7 +137,7 @@ krews:
     # The usual guideline for this is to be at most 50 chars long.
     #
     # Default is empty.
-    short_description: kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI.
+    short_description: "kubectl-cred is a kubernetes plugin to which switch to contexts and namespaces and clusters using an interactive CLI."
 
     # Caveats for the user of your binary.
     # The usual guideline for this is to wrap the line at 80 chars.
@@ -151,4 +151,4 @@ krews:
     # If set to auto, the release will not be uploaded to the Krew plugin
     # in case there is an indicator for prerelease in the tag e.g. v1.0.0-rc1
     # Default is false.
-    skip_upload: true
+    skip_upload: false
