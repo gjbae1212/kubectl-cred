@@ -80,7 +80,7 @@ krews:
     # Gitea is not supported yet, but the support coming
     index:
       owner: gjbae1212
-      name: cred
+      name: kubectl-cred
 
       # Optionally a branch can be provided.
       # Defaults to the default repository branch.
