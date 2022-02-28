@@ -19,7 +19,7 @@ jobs:
           export GOPATH=$(go env GOPATH)
           echo $GOPATH
       - name: GoReleaser
-        uses: goreleaser/goreleaser-action@v2.4.1
+        uses: goreleaser/goreleaser-action@v2.9.0
         with:
           version: latest
           args: release --rm-dist
